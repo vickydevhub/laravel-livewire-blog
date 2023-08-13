@@ -1,0 +1,15 @@
+Install Laravel
+composer create-project laravel/laravel laravel-liwewire-blog
+
+Install Livewire
+composer require livewire/livewire
+
+Publishing the configuration file
+php artisan livewire:publish --config
+
+Create Post model and migration
+php artisan make:migration create_posts_table
+php artisan make:model POST
+
+Create Post component
+php artisan make:livewire post
