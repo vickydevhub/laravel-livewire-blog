@@ -22,3 +22,6 @@ php artisan make:livewire Category
 
 Tag
 php artisan make:livewire Tag
+
+To install Pest's Livewire plugin, you need to require the plugin via Composer.
+composer require pestphp/pest-plugin-livewire --dev
