@@ -12,6 +12,6 @@ class POST extends Model
     protected $table = 'posts';
 
     protected $fillable = [
-        'title', 'description'
+        'title', 'content'
     ];
 }

@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Livewire\Post;
+use App\Http\Livewire\Authentication;
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Auth;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,5 +16,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/',function(){
-    return view('home');
+    return view('welcome');
  });
+
+ Route::post('/logout', function () {
+    Auth::logout();
+    return redirect('/');
+})->name('logout');
+
+ Route::get('/posts', Post::class)->name('posts')->middleware('auth');
+
+ Route::get('/auth', Authentication::class)->name('auth');

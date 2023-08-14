@@ -7,7 +7,7 @@ use App\Models\Post as Posts;
 
 class Post extends Component
 {
-    public $posts, $title, $description, $postId, $updatePost = false, $addPost = false;
+    public $posts, $title, $content, $postId, $updatePost = false, $addPost = false;
  
     /**
      * delete action listener
@@ -21,30 +21,30 @@ class Post extends Component
      */
     protected $rules = [
         'title' => 'required',
-        'description' => 'required'
+        'content' => 'required'
     ];
  
     /**
-     * Reseting all inputted fields
+     * Resetting all inputted fields
      * @return void
      */
     public function resetFields(){
         $this->title = '';
-        $this->description = '';
+        $this->content = '';
     }
  
     /**
-     * render the post data
+     * Render the post data
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function render()
     {
-        $this->posts = Posts::select('id', 'title', 'description')->get();
+        $this->posts = Posts::select('id', 'title', 'content')->get();
         return view('livewire.post');
     }
  
     /**
-     * Open Add Post form
+     * Open Create Post form
      * @return void
      */
     public function addPost()
@@ -54,7 +54,7 @@ class Post extends Component
         $this->updatePost = false;
     }
      /**
-      * store the user inputted post data in the posts table
+      * store the post data in the posts table
       * @return void
       */
     public function storePost()
@@ -63,7 +63,7 @@ class Post extends Component
         try {
             Posts::create([
                 'title' => $this->title,
-                'description' => $this->description
+                'content' => $this->content
             ]);
             session()->flash('success','Post Created Successfully!!');
             $this->resetFields();
@@ -74,7 +74,7 @@ class Post extends Component
     }
  
     /**
-     * show existing post data in edit post form
+     * show selected post data in edit post form
      * @param mixed $id
      * @return void
      */
@@ -85,7 +85,7 @@ class Post extends Component
                 session()->flash('error','Post not found');
             } else {
                 $this->title = $post->title;
-                $this->description = $post->description;
+                $this->content = $post->content;
                 $this->postId = $post->id;
                 $this->updatePost = true;
                 $this->addPost = false;
@@ -97,7 +97,7 @@ class Post extends Component
     }
  
     /**
-     * update the post data
+     * update post data
      * @return void
      */
     public function updatePost()
@@ -106,7 +106,7 @@ class Post extends Component
         try {
             Posts::whereId($this->postId)->update([
                 'title' => $this->title,
-                'description' => $this->description
+                'content' => $this->content
             ]);
             session()->flash('success','Post Updated Successfully!!');
             $this->resetFields();
@@ -128,7 +128,7 @@ class Post extends Component
     }
  
     /**
-     * delete specific post data from the posts table
+     * delete selected post data from the posts table
      * @param mixed $id
      * @return void
      */
@@ -136,9 +136,9 @@ class Post extends Component
     {
         try{
             Posts::find($id)->delete();
-            session()->flash('success',"Post Deleted Successfully!!");
+            session()->flash('success',"Post Deleted Successfully!");
         }catch(\Exception $e){
-            session()->flash('error',"Something goes wrong!!");
+            session()->flash('error',"Something went wrong!!");
         }
     }
 }

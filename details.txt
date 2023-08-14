@@ -13,3 +13,12 @@ php artisan make:model POST
 
 Create Post component
 php artisan make:livewire post
+
+Authentication
+php artisan make:livewire Authentication
+
+Category
+php artisan make:livewire Category
+
+Tag
+php artisan make:livewire Tag

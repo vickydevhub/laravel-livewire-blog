@@ -28,7 +28,7 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
-                                <th>Description</th>
+                                <th>Content</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -40,7 +40,7 @@
                                             {{$post->title}}
                                         </td>
                                         <td>
-                                            {{$post->description}}
+                                            {{$post->content}}
                                         </td>
                                         <td>
                                             <button wire:click="editPost({{$post->id}})" class="btn btn-primary btn-sm">Edit</button>
